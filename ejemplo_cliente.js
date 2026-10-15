@@ -4,6 +4,7 @@
 import axios from 'axios';
 import { CookieJar } from 'tough-cookie';
 import { wrapper } from 'axios-cookiejar-support';
+import { pathToFileURL } from 'node:url';
 
 // Configurar axios con soporte de cookies
 const jar = new CookieJar();
@@ -199,7 +200,10 @@ console.log('2. Instala las dependencias adicionales: npm install axios tough-co
 console.log('3. Ejecuta este archivo: node ejemplo_cliente.js\n');
 
 // Si se ejecuta directamente, mostrar instrucciones
-if (import.meta.url === `file://${process.argv[1]}`) {
+console.log("Valor: ",import.meta.url);
+console.log(`file://${process.argv[1]}`);
+
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   console.log('Este es un archivo de ejemplo. Sigue las instrucciones arriba para probarlo.');
   probarAPI();
 }
